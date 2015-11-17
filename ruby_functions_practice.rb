@@ -77,6 +77,35 @@ def number_to_short_month_name(num)
   number_to_full_month_name(num)[0..2]
 end
 
+def number_to_ordinal(num)
+  case num   
+    when 1
+      "first"
+    when 2
+      "second"
+    when 3
+      "third"
+    when 4
+      "fourth"
+    when 5
+      "fifth"
+    when 6
+      "sixth"
+    when 7
+      "seventh"
+    when 8
+      "eighth"
+    when 9
+      "ninth"
+    when 10
+      "tenth"
+    when 11
+      "eleventh"
+    when 12
+      "twelth"
+  end
+end
+
 
 #### Further Challenges
 
