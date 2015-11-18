@@ -47,3 +47,19 @@ puts "\n"
 
 ###any other functionality you want to add.
 
+##holder of largest business account
+largest_business_account_holder = largest_bank_account_holder_of_type('business')
+puts "holder of largest business bank account is #{largest_business_account_holder}"
+puts "\n"
+
+##open a bank account
+puts "Open a bank account"
+print "Name: "
+holder_name = gets.chomp
+print "Amount to deposit: £"
+amount = gets.to_i
+print "Account type (personal/business): "
+type = gets.chomp
+open_bank_account(holder_name, amount, type)
+
+

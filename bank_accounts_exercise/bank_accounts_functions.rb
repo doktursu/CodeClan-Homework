@@ -31,7 +31,7 @@ ACCOUNTS = [
   },
   {
     holder_name: "Tony",
-    amount: 150,
+    amount: 4500, #150
     type: "personal"
   },
   {
@@ -41,7 +41,7 @@ ACCOUNTS = [
   },
 ]
 
-########## By Looping ##########
+######### By Looping ##########
 def number_of_bank_accounts()
   ACCOUNTS.length
 end
@@ -81,29 +81,85 @@ def total_cash_business_account()
 end
 
 def largest_bank_account_holder()
-  amounts = []
+  max = ACCOUNTS[0][:amount]
+  max_holder = ""
   for account in ACCOUNTS
-    amounts << account[:amount]
+    if account[:amount] > max
+      max = account[:amount]
+      max_holder = account[:holder_name]
+    # Check for multiple holders with max amount
+    elsif account[:amount] == max
+      max_holder = max_holder + " and " + account[:holder_name]
+    end
   end
-  largest_amount = amounts.max
-  i = amounts.index(largest_amount)
-
-  return ACCOUNTS[i][:holder_name]
+  return max_holder
 end
 
 def largest_personal_bank_account_holder()
-  amounts = []
+
+  ######### By Looping ##########
+  personal_accounts = []
   for account in ACCOUNTS
     if account[:type] == 'personal'
-      amounts << account[:amount]
-    else
-      amounts << -1
+      personal_accounts << account
     end
   end
-  largest_amount = amounts.max
-  i = amounts.index(largest_amount)
 
-  return ACCOUNTS[i][:holder_name]
+  max = personal_accounts[0][:amount]
+  max_holder = ""
+  for account in personal_accounts
+    if account[:amount] > max
+      max = account[:amount]
+      max_holder = account[:holder_name]
+    # Check for multiple holders with max amount
+    elsif account[:amount] == max
+      max_holder = max_holder + " and " + account[:holder_name]
+    end
+  end
+  return max_holder
+
+  ######### With select and max_by ##########
+  ######### Does not return multiple holders... ##########
+  # personal_accounts = ACCOUNTS.select { |account| account[:type] == 'personal' } 
+  # max_holder = personal_accounts.max_by { |account| account[:amount] }[:holder_name]
+
+end
+
+def largest_bank_account_holder_of_type(type=nil)
+  if type == nil
+    bank_accounts = ACCOUNTS
+  else
+    bank_accounts = []
+    for account in ACCOUNTS
+      if account[:type] == type
+        bank_accounts << account
+      end
+    end
+  end
+
+  max = bank_accounts[0][:amount]
+  max_holder = ""
+  for account in bank_accounts
+    if account[:amount] > max
+      max = account[:amount]
+      max_holder = account[:holder_name]
+    # Check for multiple holders with max amount
+    elsif account[:amount] == max
+      max_holder = max_holder + " and " + account[:holder_name]
+    end
+  end
+  return max_holder
+end
+
+def open_bank_account(name, amount, type)
+  account = {
+    holder_name: name,
+    amount: amount,
+    type: type
+  }
+  ACCOUNTS << account
+  puts "Your #{type} account has been created. Thank you, #{name}."
+  puts account
 end
 
 ########## By Iterating ##########
