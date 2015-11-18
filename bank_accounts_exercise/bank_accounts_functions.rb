@@ -1,3 +1,5 @@
+##### Gave Tony 4500 in account to prove a concept #####
+
 ACCOUNTS = [
   {
     holder_name: "Jay",
