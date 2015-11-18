@@ -114,7 +114,7 @@ def volume_of_cube(side)
 end
 
 def volume_of_sphere(radius)
-  4/3 * Math::PI * radius**3
+  4.0/3 * Math::PI * radius**3
 end
 
 def nights_until_christmas(date)
