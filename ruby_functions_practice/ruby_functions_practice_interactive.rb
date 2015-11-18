@@ -105,12 +105,12 @@ case function
 
   ####Geometry
   when 'cube volume' 
-    cube_length = prompt_i("Enter the length of a cube: ")
+    cube_length = prompt("Enter the length of a cube: ").to_f
     cube_volume = volume_of_cube(cube_length)
     puts "A cube with the side of #{cube_length}un has a volume of #{cube_volume}un^3"
 
   when 'sphere volume'
-    sphere_radius = prompt_i("Enter the radius of a sphere: ")
+    sphere_radius = prompt("Enter the radius of a sphere: ").to_f
     sphere_volume = volume_of_sphere(sphere_radius)
     puts "A sphere with the radius of #{sphere_radius}un has a volume of #{sphere_volume}un^3"
 
@@ -128,7 +128,8 @@ case function
     puts "The #{ordinal} month in 3 letters is #{month_string}"
 
   when 'christmas'
-    year = prompt_i("Enter the year: ")
+    year = Date.today.year
+    puts "The year is: #{year}"
     month = prompt_i("Enter the month (1~12): ")
     day = prompt_i("Enter the day: ")
     today = Date.new(year, month, day)

@@ -126,9 +126,41 @@ def nights_until_christmas(date)
   # Set Christmas Day to Next Year if date is past Christmas of current year
   xmas_day = Date.new(year+1,12,25) if xmas_day - date < 0
 
+  # Alternate
+  # xmas_day = Date.new(year+1,12,25) if xmas_day.yday < date.yday
+
   (xmas_day - date).to_i
 end
 
 def age_today(date)
   ((Date.today - date)/365).to_i
 end    
+
+
+#### Leap year problem
+
+=begin
+if (born on a leap day)
+  1-year old on feb 28 or mar 1?
+if (born after feb 28) && (is a leap year)
+  1-year old on day + 1 day
+=end
+
+
+# # Alternate, more accurate year? Not all years have 365 days.
+# def age_today(bday)
+#   today = Date.new(2016,2,29)
+#   feb_29_ordinal = 60
+
+#   # If current year is leap year, and bday is on or after February 29,
+#   # compensate for extra ordinal day by removing one day from bday
+#   bday -= 1 if (today.leap?) && (bday.yday >= feb_29_ordinal)
+
+#   # if not their birthday yet
+#   if bday.yday < today.yday
+#     age = today.year - bday.year - 1
+#   else
+#     age = today.year - bday.year
+#   end
+# end
+
