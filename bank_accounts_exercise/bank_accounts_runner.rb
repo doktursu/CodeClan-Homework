@@ -52,6 +52,21 @@ largest_business_account_holder = largest_bank_account_holder_of_type('business'
 puts "holder of largest business bank account is #{largest_business_account_holder}"
 puts "\n"
 
+##holder of smallest bank account
+smallest_account_holder = smallest_bank_account_holder_of_type()
+puts "holder of smallest bank account is #{smallest_account_holder}"
+puts "\n"
+
+##holder of smallest business account
+smallest_business_account_holder = smallest_bank_account_holder_of_type('business')
+puts "holder of smallest business bank account is #{smallest_business_account_holder}"
+puts "\n"
+
+##holder of smallest personal account
+smallest_personal_account_holder = smallest_bank_account_holder_of_type('personal')
+puts "holder of smallest personal bank account is #{smallest_personal_account_holder}"
+puts "\n"
+
 ##open a bank account
 puts "Open a bank account"
 print "Name: "
@@ -60,6 +75,12 @@ print "Amount to deposit: £"
 amount = gets.to_i
 print "Account type (personal/business): "
 type = gets.chomp
+puts "\n"
 open_bank_account(holder_name, amount, type)
+puts "\n"
 
+##updated last account owner
+last_bank_owner = last_bank_account_holder()
+puts "last bank account owner is now #{last_bank_owner}"
+puts "\n"
 

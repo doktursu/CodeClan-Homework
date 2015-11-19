@@ -71,7 +71,9 @@ def last_bank_account_holder()
 end
 
 def average_bank_account_value()
-  total_cash_in_bank()/ACCOUNTS.length
+  average_value = total_cash_in_bank()/ACCOUNTS.length.to_f
+  # Truncate to 2 decimal places
+  (average_value * 100).to_i / 100.0
 end
 
 def total_cash_business_account()
@@ -84,13 +86,14 @@ end
 
 def largest_bank_account_holder()
   max = ACCOUNTS[0][:amount]
-  max_holder = ""
+  max_holder = ACCOUNTS[0][:holder_name]
   for account in ACCOUNTS
     if account[:amount] > max
       max = account[:amount]
       max_holder = account[:holder_name]
-    # Check for multiple holders with max amount
-    elsif account[:amount] == max
+    # Check for multiple holders with max amount, 
+    # and no repeat if first account is max_holder
+    elsif account[:amount] == max && max_holder != account[:holder_name]
       max_holder = max_holder + " and " + account[:holder_name]
     end
   end
@@ -108,13 +111,14 @@ def largest_personal_bank_account_holder()
   end
 
   max = personal_accounts[0][:amount]
-  max_holder = ""
+  max_holder = personal_accounts[0][:holder_name]
   for account in personal_accounts
     if account[:amount] > max
       max = account[:amount]
       max_holder = account[:holder_name]
-    # Check for multiple holders with max amount
-    elsif account[:amount] == max
+    # Check for multiple holders with max amount, 
+    # and no repeat if first account is max_holder
+    elsif account[:amount] == max && max_holder != account[:holder_name]
       max_holder = max_holder + " and " + account[:holder_name]
     end
   end
@@ -140,17 +144,45 @@ def largest_bank_account_holder_of_type(type=nil)
   end
 
   max = bank_accounts[0][:amount]
-  max_holder = ""
+  max_holder = bank_accounts[0][:holder_name]
   for account in bank_accounts
     if account[:amount] > max
       max = account[:amount]
       max_holder = account[:holder_name]
-    # Check for multiple holders with max amount
-    elsif account[:amount] == max
+    # Check for multiple holders with max amount, 
+    # and no repeat if first account is max_holder
+    elsif account[:amount] == max && max_holder != account[:holder_name]
       max_holder = max_holder + " and " + account[:holder_name]
     end
   end
   return max_holder
+end
+
+def smallest_bank_account_holder_of_type(type=nil)
+  if type == nil
+    bank_accounts = ACCOUNTS
+  else
+    bank_accounts = []
+    for account in ACCOUNTS
+      if account[:type] == type
+        bank_accounts << account
+      end
+    end
+  end
+
+  min = bank_accounts[0][:amount]
+  min_holder = bank_accounts[0][:holder_name]
+  for account in bank_accounts
+    if account[:amount] < min
+      min = account[:amount]
+      min_holder = account[:holder_name]
+    # Check for multiple holders with min amount, 
+    # and no repeat if first account is min_holder
+    elsif account[:amount] == min && min_holder != account[:holder_name]
+      min_holder = min_holder + " and " + account[:holder_name]
+    end
+  end
+  return min_holder
 end
 
 def open_bank_account(name, amount, type)
